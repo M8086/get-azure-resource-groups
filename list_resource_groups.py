@@ -28,7 +28,7 @@ def get_resource_groups():
         for group in rg_iter:
             print(f'{group.name}')
     except CloudError:
-        print('Could not get the public IPs:\n{}'.format(traceback.format_exc()))
+        print('Could not get the resource groups:\n{}'.format(traceback.format_exc()))
     else:
         print('\n\nGathered all resource groups')
 
