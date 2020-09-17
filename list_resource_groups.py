@@ -24,8 +24,7 @@ def get_resource_groups():
     try:
         print('Gathering resource groups...\n')
         rg = client.resource_groups.list()
-        rg_iter = iter(rg.__iter__())
-        for group in rg_iter:
+        for group in rg:
             print(f'{group.name}')
     except CloudError:
         print('Could not get the resource groups:\n{}'.format(traceback.format_exc()))
