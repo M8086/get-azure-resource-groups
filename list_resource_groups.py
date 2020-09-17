@@ -22,11 +22,15 @@ client = ResourceManagementClient(credentials, subscription_id)
 # gathers all resource groups and prints them to the terminal
 def get_resource_groups():
     try:
+        print('Gathering resource groups...\n')
         rg = client.resource_groups.list()
-        while True:
-            print(f"{rg.next().name}")
-    except StopIteration:
-        print("\nGathered all resource groups.")
+        rg_iter = iter(rg.__iter__())
+        for group in rg_iter:
+            print(f'{group.name}')
+    except CloudError:
+        print('Could not get the public IPs:\n{}'.format(traceback.format_exc()))
+    else:
+        print('\n\nGathered all resource groups')
 
 if __name__ == "__main__":
     get_resource_groups()
